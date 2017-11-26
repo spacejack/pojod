@@ -1,0 +1,16 @@
+/node_modules
+
+*.diff
+*.err
+*.ini
+*.log
+*.stackdump
+*.swp
+._*
+.AppleDouble
+.directory
+.DS_Store
+.LSOverride
+.Spotlight-V100
+.Trashes
+Thumbs.db

@@ -1,0 +1,36 @@
+{
+  "name": "pojod",
+  "version": "0.1.0",
+  "description": "POJOD: Minimalist object dictionary utility (Typescript)",
+  "main": "index.js",
+  "scripts": {
+    "test": "ts-node --project test/tsconfig.json test/test.ts",
+    "build": "tsc -p src",
+    "clean": "rm -f *.js *.d.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spacejack/pojod.git"
+  },
+  "keywords": [
+    "object",
+    "dictionary",
+    "map",
+    "record",
+    "pojo",
+    "javascript",
+    "typescript"
+  ],
+  "author": "spacejack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spacejack/pojod/issues"
+  },
+  "homepage": "https://github.com/spacejack/pojod#readme",
+  "devDependencies": {
+    "ospec": "^1.4.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^4.5.1",
+    "typescript": "^2.6.1"
+  }
+}
