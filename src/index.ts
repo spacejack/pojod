@@ -52,6 +52,10 @@ declare namespace D {
 		toMap<K extends string, V>(r: Record<K, V>): Map<K, V>
 		/** Convert object to Map */
 		toMap<T>(d: D<T>): Map<string, T>
+		/** Clear (own) object keys */
+		clear<K extends string, V>(r: Record<K, V>): Record<K, V>
+		/** Clear (own) object keys */
+		clear<T>(d: D<T>): D<T>
 	}
 }
 
@@ -122,6 +126,13 @@ function toMap<K extends string, V>(r: Record<K, V>): Map<K, V> {
 	return m
 }
 
+function clear (d: D) {
+	Object.keys(d).forEach(k => {
+		delete d[k]
+	})
+	return d
+}
+
 const D: D.Static = create as any
 D.isEmpty = isEmpty
 D.size = size
@@ -132,5 +143,6 @@ D.firstKey = firstKey
 D.lastKey = lastKey
 D.keys = keys
 D.toMap = toMap
+D.clear = clear
 
 export default D

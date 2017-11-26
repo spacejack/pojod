@@ -45,6 +45,10 @@ declare namespace D {
         toMap<K extends string, V>(r: Record<K, V>): Map<K, V>;
         /** Convert object to Map */
         toMap<T>(d: D<T>): Map<string, T>;
+        /** Clear (own) object keys */
+        clear<K extends string, V>(r: Record<K, V>): Record<K, V>;
+        /** Clear (own) object keys */
+        clear<T>(d: D<T>): D<T>;
     }
 }
 declare const D: D.Static;

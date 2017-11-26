@@ -4,7 +4,7 @@ A minimalist Plain Old Javscript Object Dictionary utility.
 
 Useful when using plain objects as dictionaries in Javascript and Typescript. Also supplements Typescript's `Record<K,V>` object type.
 
-This library does not attempt to replicate the functionality of libraries like lodash or ramda. It is intended to be a small (<1kb) utility that smooths some of the rough edges of working with plain objects and types.
+This library does not attempt to replicate the functionality of libraries like lodash or ramda. It is intended to be a small (1kb minified) utility that smooths some of the rough edges of working with plain objects and types.
 
 ## Install
 
@@ -41,7 +41,7 @@ const d = D<'a' | 'b', number>() // Equivalent to const d: Record<'a' | 'b', num
 const d = D({a: 1, b: 2}) // d: Record<'a' | 'b', number>
 
 // Create a dictionary with string keys from another object (allows adding arbitrary keys)
-const d = D<number>({a: 1, b: 2})
+const d = D<number>({a: 1, b: 2}) // d: {[id: string]: number}
 
 // Create a dictionary object from a Map (the map must have string keys)
 const m = new Map<string, number>()
@@ -86,6 +86,10 @@ D.keys({a: 1, b: 2}).forEach(k => {
 
 // Convert object to Map
 const m = D.toMap({a: 1, b: 2})
+
+// Clear all (own) properties
+const d = D<number>({a: 1, b: 2})
+D.clear(d) // {}
 
 // D can be used as a shorthand alias for type {[id: string]: T}
 const d: D<number> = {}

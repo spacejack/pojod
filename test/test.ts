@@ -113,6 +113,14 @@ o.spec("pojod", () => {
 		o(m.has('b')).equals(true)
 		o(m.size).equals(4)
 	})
+
+	o("clear works", () => {
+		let d: {[id: string]: number} = {a: 1, b: 2}
+		D.clear(d)
+		o(D.size(d)).equals(0)
+		d.a = 10
+		o(d.a).equals(10)
+	})
 })
 
 o.run()

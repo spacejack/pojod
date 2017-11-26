@@ -65,6 +65,12 @@ function toMap(r) {
     });
     return m;
 }
+function clear(d) {
+    Object.keys(d).forEach(function (k) {
+        delete d[k];
+    });
+    return d;
+}
 var D = create;
 D.isEmpty = isEmpty;
 D.size = size;
@@ -75,4 +81,5 @@ D.firstKey = firstKey;
 D.lastKey = lastKey;
 D.keys = keys;
 D.toMap = toMap;
+D.clear = clear;
 exports.default = D;
