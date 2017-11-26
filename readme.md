@@ -45,13 +45,13 @@ const d = D<string>({a: 1, b: 2})
 
 // Create a dictionary object from a Map (the map must have string keys)
 const m = new Map<string, number>()
-m.add('a', 1)
+m.set('a', 1)
 const d = D(m) // {a: 1}
 
 // Create a Record from a Map with typed keys (map keys must extend string)
 const m = new Map<'a' | 'b', number>()
-m.add('a', 1)
-m.add('b', 2)
+m.set('a', 1)
+m.set('b', 2)
 const d = D(m) // {a: 1, b: 2}
 
 // Check if object is empty (excluding prototype)
