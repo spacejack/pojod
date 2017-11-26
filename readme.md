@@ -14,6 +14,10 @@ This library does not attempt to replicate the functionality of libraries like l
 
 ## Usage
 
+The default export can be used a type and a factory function. It also provides some static helper functions as properties.
+
+The generic type `D<T>` can be used as a shorthand alias for `{[id: string]: T}`.
+
 The factory function `D` always returns a plain JS object *without* a prototype by using `Object.create(null)`.
 
 Helper functions (`D.isEmpty`, `D.size`, `D.has`, etc.) are safe to use on objects with or without prototypes. Only the object's *own* properties are considered. Properties on the prototype chain are ignored.
@@ -32,7 +36,7 @@ const d = D<string>() // Equivalent to const d: {[id: string]: string} = Object.
 const d = D<'a' | 'b', number>() // Equivalent to const d: Record<'a' | 'b', number> = Object.create(null)
 
 // Create an object having typed keys from another object.
-const d = D({a: 1, b: 2}) // r: Record<'a' | 'b', number>
+const d = D({a: 1, b: 2}) // d: Record<'a' | 'b', number>
 
 // Create a dictionary with string keys from another object (allows adding arbitrary keys)
 const d = D<string>({a: 1, b: 2})
@@ -78,7 +82,7 @@ D.keys({a: 1, b: 2}).forEach(k => {
     console.log(c[k]) // type checks ok
 })
 
-// Import Dict type as a shorthand for type {[id: string]: T}
-import {Dict} from 'pojod'
-let d: Dict<number>
+// D can be used as a shorthand alias for type {[id: string]: T}
+const d: D<number> = {}
+d.a = 1
 ```

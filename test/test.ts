@@ -1,5 +1,5 @@
 declare const require: (moduleName: string) => any
-import D, {Dict} from '../src'
+import D from '../src'
 const o = require('ospec')
 
 o.spec("pojod", () => {
@@ -41,7 +41,7 @@ o.spec("pojod", () => {
 	})
 
 	o("size works with prototype", () => {
-		const a: Dict<number> = {a: 1, b: 2, c: 3}
+		const a: D<number> = {a: 1, b: 2, c: 3}
 		o(D.size(a)).equals(3)
 		o(D.size(a)).equals(Object.keys(a).length)
 		a.d = 4
@@ -75,7 +75,7 @@ o.spec("pojod", () => {
 	})
 
 	o("keyAt works", () => {
-		const a: Dict<string | number> = {x: 'abc', y: 2, z: '0'}
+		const a: D<string | number> = {x: 'abc', y: 2, z: '0'}
 		o(D.keyAt(a, 2)).equals('z')
 		o(D.keyAt(a, 1)).equals('y')
 		o(D.keyAt(a, 0)).equals('x')
