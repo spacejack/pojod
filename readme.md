@@ -6,6 +6,12 @@ Useful when using plain objects as dictionaries in Javascript and Typescript. Al
 
 This library does not attempt to replicate the functionality of libraries like lodash or ramda. It is intended to be a small (<1kb) utility that smooths some of the rough edges of working with plain objects and types.
 
+## Install
+
+    npm i pojod
+
+*Typescript types are included.*
+
 ## Usage
 
 The factory function `D` always returns a plain JS object *without* a prototype by using `Object.create(null)`.
