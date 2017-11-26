@@ -13,8 +13,8 @@ The factory function `D` always returns a plain JS object *without* a prototype 
 Helper functions (`D.isEmpty`, `D.size`, `D.has`, etc.) are safe to use on objects with or without prototypes. Only the object's *own* properties are considered. Properties on the prototype chain are ignored.
 
 ```typescript
-import D from 'dict'
-// var D = require('dict').default
+import D from 'pojod'
+// var D = require('pojod').default
 
 // Create an empty object dictionary without a prototype having any values.
 const d = D() // Equivalent to const d: {[id: string]: any} = Object.create(null)
@@ -73,6 +73,6 @@ D.keys({a: 1, b: 2}).forEach(k => {
 })
 
 // Import Dict type as a shorthand for type {[id: string]: T}
-import {Dict} from 'dict'
+import {Dict} from 'pojod'
 let d: Dict<number>
 ```
