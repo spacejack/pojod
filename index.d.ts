@@ -41,6 +41,10 @@ declare namespace D {
         keys<T extends string>(rec: Record<T, any>): T[];
         /** Return array of object keys */
         keys(d: D): string[];
+        /** Convert object to Map */
+        toMap<K extends string, V>(r: Record<K, V>): Map<K, V>;
+        /** Convert object to Map */
+        toMap<T>(d: D<T>): Map<string, T>;
     }
 }
 declare const D: D.Static;

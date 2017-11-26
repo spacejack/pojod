@@ -45,9 +45,13 @@ declare namespace D {
 		/** Returns last iterated key or undefined. Object key order caveats apply. */
 		lastKey (d: D): string | undefined
 		/** Return array of typed object keys */
-		keys<T extends string>(rec: Record<T,any>): T[]
+		keys<T extends string>(rec: Record<T, any>): T[]
 		/** Return array of object keys */
 		keys (d: D): string[]
+		/** Convert object to Map */
+		toMap<K extends string, V>(r: Record<K, V>): Map<K, V>
+		/** Convert object to Map */
+		toMap<T>(d: D<T>): Map<string, T>
 	}
 }
 
@@ -110,6 +114,14 @@ function keys (d: D) {
 	return Object.keys(d)
 }
 
+function toMap<K extends string, V>(r: Record<K, V>): Map<K, V> {
+	const m = new Map<K, V>()
+	Object.keys(r).forEach(k => {
+		m.set(k as any, (r as any)[k])
+	})
+	return m
+}
+
 const D: D.Static = create as any
 D.isEmpty = isEmpty
 D.size = size
@@ -119,5 +131,6 @@ D.keyAt = keyAt
 D.firstKey = firstKey
 D.lastKey = lastKey
 D.keys = keys
+D.toMap = toMap
 
 export default D

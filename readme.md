@@ -84,6 +84,9 @@ D.keys({a: 1, b: 2}).forEach(k => {
     console.log(c[k]) // type checks ok
 })
 
+// Convert object to Map
+const m = D.toMap({a: 1, b: 2})
+
 // D can be used as a shorthand alias for type {[id: string]: T}
 const d: D<number> = {}
 d.a = 1

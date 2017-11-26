@@ -104,6 +104,15 @@ o.spec("pojod", () => {
 		o(D.keys(a).length).equals(3)
 		o(D.keys(a)[2] === 'c').equals(true)
 	})
+
+	o("toMap works", () => {
+		const d = {a: 1, b: 2, c: 3, d: 'a'}
+		const m = D.toMap(d)
+		o(m instanceof Map).equals(true)
+		o(m.get('a')).equals(1)
+		o(m.has('b')).equals(true)
+		o(m.size).equals(4)
+	})
 })
 
 o.run()

@@ -58,6 +58,13 @@ function lastKey(d) {
 function keys(d) {
     return Object.keys(d);
 }
+function toMap(r) {
+    var m = new Map();
+    Object.keys(r).forEach(function (k) {
+        m.set(k, r[k]);
+    });
+    return m;
+}
 var D = create;
 D.isEmpty = isEmpty;
 D.size = size;
@@ -67,4 +74,5 @@ D.keyAt = keyAt;
 D.firstKey = firstKey;
 D.lastKey = lastKey;
 D.keys = keys;
+D.toMap = toMap;
 exports.default = D;
