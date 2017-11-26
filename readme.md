@@ -41,7 +41,7 @@ const d = D<'a' | 'b', number>() // Equivalent to const d: Record<'a' | 'b', num
 const d = D({a: 1, b: 2}) // d: Record<'a' | 'b', number>
 
 // Create a dictionary with string keys from another object (allows adding arbitrary keys)
-const d = D<string>({a: 1, b: 2})
+const d = D<number>({a: 1, b: 2})
 
 // Create a dictionary object from a Map (the map must have string keys)
 const m = new Map<string, number>()
