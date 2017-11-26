@@ -1,4 +1,4 @@
-declare type D<T> = {
+declare type D<T = any> = {
     [id: string]: T;
 };
 declare namespace D {
@@ -16,11 +16,11 @@ declare namespace D {
         /** Creates dictionary with no prototype with the contents of the supplied object. */
         <T>(d: D<T>): D<T>;
         /** Returns true if object has no (own) entries. */
-        isEmpty(d: D<any>): boolean;
+        isEmpty(d: D): boolean;
         /** Returns number of (own) keys. */
-        size(d: D<any>): number;
+        size(d: D): number;
         /** Returns true if object has (own) key. */
-        has(d: D<any>, key: string): boolean;
+        has(d: D, key: string): boolean;
         /** Returns key for first matched value otherwise undefined. */
         keyOf<K extends string, V>(record: Record<K, V>, v: V): K | undefined;
         /** Returns key for first matched value otherwise undefined. */
@@ -28,19 +28,19 @@ declare namespace D {
         /** Returns nth iterated key or undefined. Object key order caveats apply. */
         keyAt<T extends string>(record: Record<T, any>, index: number): T | undefined;
         /** Returns nth iterated key or undefined. Object key order caveats apply. */
-        keyAt(d: D<any>, index: number): string | undefined;
+        keyAt(d: D, index: number): string | undefined;
         /** Returns first iterated key or undefined. Object key order caveats apply. */
         firstKey<T extends string>(record: Record<T, any>): T | undefined;
         /** Returns first iterated key or undefined. Object key order caveats apply. */
-        firstKey(d: D<any>): string | undefined;
+        firstKey(d: D): string | undefined;
         /** Returns last iterated key or undefined. Object key order caveats apply. */
         lastKey<T extends string>(record: Record<T, any>): T | undefined;
         /** Returns last iterated key or undefined. Object key order caveats apply. */
-        lastKey(d: D<any>): string | undefined;
+        lastKey(d: D): string | undefined;
         /** Return array of typed object keys */
         keys<T extends string>(rec: Record<T, any>): T[];
         /** Return array of object keys */
-        keys(d: D<any>): string[];
+        keys(d: D): string[];
     }
 }
 declare const D: D.Static;
