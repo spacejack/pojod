@@ -14,6 +14,8 @@ This library does not attempt to replicate the functionality of libraries like l
 
 ## Usage
 
+    import D from 'pojod'
+
 The default export can be used a type and a factory function. It also provides some static helper functions as properties.
 
 The generic type `D<T>` can be used as a shorthand alias for `{[id: string]: T}`.
