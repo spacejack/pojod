@@ -16,6 +16,8 @@ declare namespace D {
 		<K extends string, V>(): Record<K, V>
 		/** Creates an empty dictionary with typed keys and no prototype with the contents of the supplied Map. */
 		<K extends string, V>(map: Map<K, V>): Record<K, V>
+		/** Creates an empty dictionary with string keys and no prototype with the contents of the supplied Map. WARNING: Maps with non-string keys will be coerced to strings! */
+		<T>(map: Map<any, T>): D<T>
 		/** Creates an empty dictionary with typed keys and no prototype with the contents of the supplied object. */
 		<K extends string, V>(record: Record<K, V>): Record<K, V>
 		/** Creates an empty dictionary with typed keys and no prototype with the contents of the supplied object. */
