@@ -47,6 +47,8 @@ declare namespace D {
         toMap<K extends string, V>(r: Record<K, V>): Map<K, V>;
         /** Convert object to Map */
         toMap<T>(d: D<T>): Map<string, T>;
+        /** Invert keys and values. Keys may be lost if values are not strings and unique. */
+        invert<K extends string, V extends string>(rec: Record<K, V>): Record<V, K>;
         /** Clear (own) object keys */
         clear<K extends string, V>(r: Record<K, V>): Record<K, V>;
         /** Clear (own) object keys */

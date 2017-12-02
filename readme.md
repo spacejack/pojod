@@ -80,12 +80,17 @@ D.lastKey({a: 1, b: 2}) // 'b'
 D.keys({a: 1, b: 2}) // array with elements of type 'a' | 'b'
 
 // Iterate through typed keys of Record
-D.keys({a: 1, b: 2}).forEach(k => {
-    console.log(c[k]) // type checks ok
+const d = {a: 1, b: 2}
+D.keys(d).forEach(k => {
+    console.log(d[k]) // type checks ok
 })
 
 // Convert object to Map
 const m = D.toMap({a: 1, b: 2})
+
+// Invert keys and values
+const d = {a: 'x', b: 'y'}
+const dr = D.invert(d) // {x: 'a', y: 'b'}
 
 // Clear all (own) properties
 const d = D<number>({a: 1, b: 2})

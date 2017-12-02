@@ -14,10 +14,10 @@ function create(o) {
             });
         }
         else {
-            var keys_1 = Object.keys(o);
-            var k = void 0;
-            for (var i = 0; i < keys_1.length; ++i) {
-                k = keys_1[i];
+            var ks = Object.keys(o);
+            var i = void 0, k = void 0;
+            for (i = 0; i < ks.length; ++i) {
+                k = ks[i];
                 if (has(o, k))
                     d[k] = o[k];
             }
@@ -55,20 +55,36 @@ function lastKey(d) {
     var ks = Object.keys(d);
     return ks.length > 0 ? ks[ks.length - 1] : undefined;
 }
-function keys(d) {
-    return Object.keys(d);
+function keys(r) {
+    return Object.keys(r);
 }
 function toMap(r) {
     var m = new Map();
-    Object.keys(r).forEach(function (k) {
+    var ks = keys(r);
+    var i, k;
+    for (i = 0; i < ks.length; ++i) {
+        k = ks[i];
         m.set(k, r[k]);
-    });
+    }
     return m;
 }
+function invert(r) {
+    var rr = D();
+    var ks = keys(r);
+    var i, k;
+    for (i = 0; i < ks.length; ++i) {
+        k = ks[i];
+        rr[r[k]] = k;
+    }
+    return rr;
+}
 function clear(d) {
-    Object.keys(d).forEach(function (k) {
+    var ks = Object.keys(d);
+    var i, k;
+    for (i = 0; i < ks.length; ++i) {
+        k = ks[i];
         delete d[k];
-    });
+    }
     return d;
 }
 var D = create;
@@ -81,5 +97,6 @@ D.firstKey = firstKey;
 D.lastKey = lastKey;
 D.keys = keys;
 D.toMap = toMap;
+D.invert = invert;
 D.clear = clear;
 exports.default = D;

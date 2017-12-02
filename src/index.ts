@@ -54,6 +54,8 @@ declare namespace D {
 		toMap<K extends string, V>(r: Record<K, V>): Map<K, V>
 		/** Convert object to Map */
 		toMap<T>(d: D<T>): Map<string, T>
+		/** Invert keys and values. Keys may be lost if values are not strings and unique. */
+		invert<K extends string, V extends string>(rec: Record<K, V>): Record<V, K>
 		/** Clear (own) object keys */
 		clear<K extends string, V>(r: Record<K, V>): Record<K, V>
 		/** Clear (own) object keys */
@@ -69,11 +71,11 @@ function create<T>(o?: D<T> | Map<string, T>): D<T> {
 				d[k] = v
 			})
 		} else {
-			const keys = Object.keys(o)
-			let k: string
-			for (let i = 0; i < keys.length; ++i) {
-				k = keys[i]
-				if (has(o, k)) d[k] = (o as any)[k]
+			const ks = Object.keys(o)
+			let i: number, k: string
+			for (i = 0; i < ks.length; ++i) {
+				k = ks[i]
+				if (has(o, k)) d[k] = (o as D<T>)[k]
 			}
 		}
 	}
@@ -116,26 +118,43 @@ function lastKey (d: D): string | undefined {
 	return ks.length > 0 ? ks[ks.length - 1] : undefined
 }
 
-function keys (d: D) {
-	return Object.keys(d)
+function keys<K extends string>(r: Record<K, any>) {
+	return Object.keys(r) as K[]
 }
 
 function toMap<K extends string, V>(r: Record<K, V>): Map<K, V> {
 	const m = new Map<K, V>()
-	Object.keys(r).forEach(k => {
-		m.set(k as any, (r as any)[k])
-	})
+	const ks = keys(r)
+	let i: number, k: K
+	for (i = 0; i < ks.length; ++i) {
+		k = ks[i]
+		m.set(k, r[k])
+	}
 	return m
 }
 
+function invert<V extends string, K extends string>(r: Record<K, V>): Record<V, K> {
+	const rr = D<V, K>()
+	const ks = keys(r)
+	let i: number, k: K
+	for (i = 0; i < ks.length; ++i) {
+		k = ks[i]
+		rr[r[k]] = k
+	}
+	return rr
+}
+
 function clear (d: D) {
-	Object.keys(d).forEach(k => {
+	const ks = Object.keys(d)
+	let i: number, k: string
+	for (i = 0; i < ks.length; ++i) {
+		k = ks[i]
 		delete d[k]
-	})
+	}
 	return d
 }
 
-const D: D.Static = create as any
+const D: D.Static = create as D.Static
 D.isEmpty = isEmpty
 D.size = size
 D.has = has
@@ -145,6 +164,7 @@ D.firstKey = firstKey
 D.lastKey = lastKey
 D.keys = keys
 D.toMap = toMap
+D.invert = invert
 D.clear = clear
 
 export default D

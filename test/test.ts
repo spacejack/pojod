@@ -114,8 +114,19 @@ o.spec("pojod", () => {
 		o(m.size).equals(4)
 	})
 
+	o("invert works", () => {
+		const d = {a: 'z', b: 'y', c: 'x'}
+		const r = D.invert(d)
+		o(r.z).equals('a')
+		o(r.y).equals('b')
+		o(r.x).equals('c')
+		o(D.size(d)).equals(D.size(r))
+		o(D.firstKey(r)).equals('z')
+		o(D.lastKey(r)).equals('x')
+	})
+
 	o("clear works", () => {
-		let d: {[id: string]: number} = {a: 1, b: 2}
+		const d: {[id: string]: number} = {a: 1, b: 2}
 		D.clear(d)
 		o(D.size(d)).equals(0)
 		d.a = 10

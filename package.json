@@ -1,6 +1,6 @@
 {
   "name": "pojod",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "POJOD: Minimalist object dictionary utility (Typescript)",
   "main": "index.js",
   "scripts": {
