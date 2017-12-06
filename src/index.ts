@@ -63,6 +63,8 @@ declare namespace D {
 	}
 }
 
+const keys: <K extends string>(r: Record<K, any>) => K[] = Object.keys as any
+
 function create<T>(o?: D<T> | Map<string, T>): D<T> {
 	const d: D<T> = Object.create(null)
 	if (o) {
@@ -71,11 +73,11 @@ function create<T>(o?: D<T> | Map<string, T>): D<T> {
 				d[k] = v
 			})
 		} else {
-			const ks = Object.keys(o)
+			const ks = keys(o)
 			let i: number, k: string
 			for (i = 0; i < ks.length; ++i) {
 				k = ks[i]
-				if (has(o, k)) d[k] = (o as D<T>)[k]
+				d[k] = (o as D<T>)[k]
 			}
 		}
 	}
@@ -83,11 +85,11 @@ function create<T>(o?: D<T> | Map<string, T>): D<T> {
 }
 
 function isEmpty (d: D) {
-	return Object.keys(d).length === 0
+	return keys(d).length === 0
 }
 
 function size (d: D) {
-	return Object.keys(d).length
+	return keys(d).length
 }
 
 function has (d: D, k: string) {
@@ -95,31 +97,27 @@ function has (d: D, k: string) {
 }
 
 function keyOf<T>(d: D<T>, v: T) {
-	const keys = Object.keys(d)
+	const ks = keys(d)
 	let i: number
 	let k: string
-	for (i = 0; i < keys.length; ++i) {
-		k = keys[i]
+	for (i = 0; i < ks.length; ++i) {
+		k = ks[i]
 		if (d[k] === v) return k
 	}
 	return undefined
 }
 
 function keyAt (d: D, i: number): string | undefined {
-	return Object.keys(d)[i]
+	return keys(d)[i]
 }
 
 function firstKey (d: D): string | undefined {
-	return Object.keys(d)[0]
+	return keys(d)[0]
 }
 
 function lastKey (d: D): string | undefined {
-	const ks = Object.keys(d)
+	const ks = keys(d)
 	return ks.length > 0 ? ks[ks.length - 1] : undefined
-}
-
-function keys<K extends string>(r: Record<K, any>) {
-	return Object.keys(r) as K[]
 }
 
 function toMap<K extends string, V>(r: Record<K, V>): Map<K, V> {
@@ -145,7 +143,7 @@ function invert<V extends string, K extends string>(r: Record<K, V>): Record<V, 
 }
 
 function clear (d: D) {
-	const ks = Object.keys(d)
+	const ks = keys(d)
 	let i: number, k: string
 	for (i = 0; i < ks.length; ++i) {
 		k = ks[i]

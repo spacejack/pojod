@@ -5,6 +5,7 @@
 // https://www.github.com/spacejack/pojod
 // License: ISC
 Object.defineProperty(exports, "__esModule", { value: true });
+var keys = Object.keys;
 function create(o) {
     var d = Object.create(null);
     if (o) {
@@ -14,49 +15,45 @@ function create(o) {
             });
         }
         else {
-            var ks = Object.keys(o);
+            var ks = keys(o);
             var i = void 0, k = void 0;
             for (i = 0; i < ks.length; ++i) {
                 k = ks[i];
-                if (has(o, k))
-                    d[k] = o[k];
+                d[k] = o[k];
             }
         }
     }
     return d;
 }
 function isEmpty(d) {
-    return Object.keys(d).length === 0;
+    return keys(d).length === 0;
 }
 function size(d) {
-    return Object.keys(d).length;
+    return keys(d).length;
 }
 function has(d, k) {
     return Object.prototype.hasOwnProperty.call(d, k);
 }
 function keyOf(d, v) {
-    var keys = Object.keys(d);
+    var ks = keys(d);
     var i;
     var k;
-    for (i = 0; i < keys.length; ++i) {
-        k = keys[i];
+    for (i = 0; i < ks.length; ++i) {
+        k = ks[i];
         if (d[k] === v)
             return k;
     }
     return undefined;
 }
 function keyAt(d, i) {
-    return Object.keys(d)[i];
+    return keys(d)[i];
 }
 function firstKey(d) {
-    return Object.keys(d)[0];
+    return keys(d)[0];
 }
 function lastKey(d) {
-    var ks = Object.keys(d);
+    var ks = keys(d);
     return ks.length > 0 ? ks[ks.length - 1] : undefined;
-}
-function keys(r) {
-    return Object.keys(r);
 }
 function toMap(r) {
     var m = new Map();
@@ -79,7 +76,7 @@ function invert(r) {
     return rr;
 }
 function clear(d) {
-    var ks = Object.keys(d);
+    var ks = keys(d);
     var i, k;
     for (i = 0; i < ks.length; ++i) {
         k = ks[i];
