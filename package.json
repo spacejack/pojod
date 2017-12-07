@@ -1,6 +1,6 @@
 {
   "name": "pojod",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "POJOD: Minimalist object dictionary utility (Typescript)",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,6 @@
     "ospec": "^1.4.0",
     "ts-node": "^3.3.0",
     "tslint": "^4.5.1",
-    "typescript": "^2.6.1"
+    "typescript": "^2.6.2"
   }
 }

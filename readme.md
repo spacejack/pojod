@@ -4,7 +4,7 @@ A minimalist Plain Old Javscript Object Dictionary utility.
 
 Useful when using plain objects as dictionaries in Javascript and Typescript. Also supplements Typescript's `Record<K,V>` object type.
 
-This library does not attempt to replicate the functionality of libraries like lodash or ramda. It is intended to be a small (1kb minified) utility that smooths some of the rough edges of working with plain objects and types.
+This library does not attempt to replicate the functionality of libraries like lodash or ramda, nor does it intend to be a substitute for ES6 `Map`. It is a small (1KB minified) utility that smooths some of the rough edges when working with plain objects and types.
 
 ## Install
 
@@ -16,7 +16,7 @@ This library does not attempt to replicate the functionality of libraries like l
 
     import D from 'pojod'
 
-The default export can be used a type and a factory function. It also provides some static helper functions as properties.
+The default export can be used as a type and a factory function. It also provides some static helper functions as properties.
 
 The generic type `D<T>` can be used as a shorthand alias for `{[id: string]: T}`.
 
@@ -28,16 +28,17 @@ Helper functions (`D.isEmpty`, `D.size`, `D.has`, etc.) are safe to use on objec
 import D from 'pojod'
 // var D = require('pojod').default
 
-// Create an empty object dictionary without a prototype having any values.
+// Create an empty dictionary object without a prototype having any values.
 const d = D() // Equivalent to const d: {[id: string]: any} = Object.create(null)
 
-// Create an empty object dictionary without a prototype having string values.
+// Create an empty dictionary object without a prototype having string values.
 const d = D<string>() // Equivalent to const d: {[id: string]: string} = Object.create(null)
 
-// Create an empty object with typed keys
+// Create an empty Record object without a prototype and typed keys
 const d = D<'a' | 'b', number>() // Equivalent to const d: Record<'a' | 'b', number> = Object.create(null)
 
-// Create an object having typed keys from another object.
+// Create a Record object without a prototype having typed keys from another object.
+// (Only the source object's own properties will be copied.)
 const d = D({a: 1, b: 2}) // d: Record<'a' | 'b', number>
 
 // Create a dictionary with string keys from another object (allows adding arbitrary keys)
@@ -79,7 +80,7 @@ D.lastKey({a: 1, b: 2}) // 'b'
 // Return typed keys
 D.keys({a: 1, b: 2}) // array with elements of type 'a' | 'b'
 
-// Iterate through typed keys of Record
+// Iterate through typed keys of an object
 const d = {a: 1, b: 2}
 D.keys(d).forEach(k => {
     console.log(d[k]) // type checks ok
@@ -100,3 +101,19 @@ D.clear(d) // {}
 const d: D<number> = {}
 d.a = 1
 ```
+
+## Compatibility
+
+Requires support for `Object.create` and `Object.keys`, so IE9 and up. Converting to and from Maps requires `Map` support. You will need to provide polyfills if targeting older browsers.
+
+Performance-wise, **pojod** favours modern browsers where `Object.keys` is as fast as or faster than `for…in` loops.
+
+## Caveats
+
+Beware of relying on type inference when using the factory function on (typed) objects having properties on the prototype chain. For example:
+
+```typescript
+const d = D(new Date())
+```
+
+Will result in a `Record<K,V>` type with all of the prototype property names in the key (`K`) type, however those properties will not be copied to the resulting object.
